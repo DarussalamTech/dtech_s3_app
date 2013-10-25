@@ -1,0 +1,39 @@
+/* 
+    Document   : tableform
+    Created on : Jul 29, 2011, 2:43:29 PM
+    Author     : mohsin.shoaib
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+#update_info, .note{
+    font-size:12px;
+}
+
+.form_table{
+
+}
+.form_table th{
+    padding: 3px; margin: 0px;
+     background-color:#b2bbc5; font-size:13px;
+     color:#ffffff;
+}
+.form_table td{
+    padding: 3px; margin: 0px;
+    vertical-align: top; background:#F8F8F8;
+}
+.form_table td input,
+.form_table td select,
+.form_table td textarea
+{
+    border: 1px solid #d6dfe2;
+    background:#f5f7f8;
+}
+.errorMessage{color:red;}
+
+span.required {color:red !important;}

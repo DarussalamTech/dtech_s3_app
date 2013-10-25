@@ -1,0 +1,192 @@
+.grid-view-loading
+{
+    background:url(loading.gif) no-repeat;
+}
+
+.grid-view{
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+.attachment_files_grid{
+    margin: 0px 40px;
+}
+.grid-view table.items {
+    background: white;
+    border-collapse: collapse;
+    width: 100%;
+    font-size:13px;
+}
+.grid-view table.items th, .grid-view table.items td
+{
+    border: 1px #E9E9E9 solid;
+    text-align: center;
+    padding: 0.3em;
+}
+.grid-view table.items th {
+    color: #595959;
+    text-align: left;
+    border-bottom: 1px solid #F6F6F6;
+}
+.grid-view table.items th a {
+    color: #595959;
+    font-weight: bold;
+    text-decoration: none;
+}
+.grid-view table.items th a:hover {
+    color: #595959;
+}
+.grid-view table.items th a.asc
+{
+    background:url(../images/up.gif) right center no-repeat;
+    padding-right: 10px;
+}
+.grid-view table.items th a.desc
+{
+    background:url(../images/down.gif) right center no-repeat;
+    padding-right: 10px;
+}
+.grid-view table.items tr.even {
+    background: #f8f8f8;
+}
+.grid-view table.items tr.odd {
+    background: #fff;
+}
+
+.grid-view table.items tr.selected
+{
+    background: #fcfcfc;
+}
+
+.grid-view table.items tr:hover
+{
+    background: #f3d7e2;
+}
+.grid-view table.items td:hover
+{
+    background: #0099FF;
+    color:white;
+}
+
+.grid-view table.items thead tr:hover {
+    background:none;
+}
+
+
+.grid-view .link-column img
+{
+    border: 0;
+}
+
+.grid-view .button-column
+{
+    text-align: right;
+    width: 20%;
+}
+
+.grid-view .button-column-baseline
+{
+    text-align: right;
+    width: 19%;
+}
+.grid-view .button-column2
+{
+    text-align: right;
+    width: 10% !important;
+}
+
+.grid-view .button-column img
+{
+    border: 0;
+    padding: 2px;
+}
+
+.grid-view .checkbox-column
+{
+    width: 15px;
+}
+.grid-view .summary
+{
+    float:left;
+    margin: 0px; padding: 5px;
+    text-align: left; font-size: 12px;
+    width:48%;
+}
+.grid-view .pager
+{
+    float:right;
+    margin: 5px 0 0 0;
+    text-align: right;
+    font-size: 13px;
+}
+
+.grid-view .empty
+{
+    font-style: italic;
+}
+
+.grid-view .filters input,
+.grid-view .filters select
+{
+    width: 100%;
+    border: 1px solid #ccc;
+}
+.overDue{
+    background: #F0A;
+}
+
+.gridview2
+{
+    margin-left: 15px;
+}
+
+/*-------- print button per project */
+.per-project 
+{
+    width: 75%;
+}
+.per-project h6 
+{
+    border-bottom: 0;
+}
+.per-project-right
+{
+
+}
+.per-project a
+{
+    float: right;
+}
+.heading-grid
+{
+    border-bottom: 1px solid #C4C4C4;
+    display: block;
+    height: auto;
+    width: 100%;
+    float: left;
+}
+
+/*footer row of grid*/
+
+.grid-view table.items tfoot tr
+{
+}
+.grid-view table.items tfoot tr td
+{
+    font-weight: bold;
+}
+
+/* use for Pgrid countcolumn */
+.pointerlabel label
+{
+    cursor: pointer;
+}
+
+/*used in the css of status Report grid if location is not empty*/
+.nested_projects
+{
+    margin-left: 10px;
+}
+
+.grid-view table.items th, .grid-view table.items .button-column{
+    width: 10px;
+}

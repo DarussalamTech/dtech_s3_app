@@ -1,0 +1,84 @@
+/* 
+    Document   : detailview-styles
+    Created on : May 17, 2011, 10:58:05 AM
+    Author     : ayaz.ahmed
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+table.detail-view .null
+{
+    color: pink;
+}
+
+/*table.detail-view
+{
+    background: white;
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0;
+}*/
+
+table.detail-view {
+    	/*background: white;*/
+    	border-collapse: collapse;
+    	width: 100%;
+    	margin: 0;
+	font-size:13px;
+}
+
+table.detail-view th, table.detail-view td
+{
+    font-size: 0.9em;
+/*    border: 1px white solid;*/
+    padding: 0.3em 0.6em;
+    vertical-align: top;
+    border-bottom: 1px dotted #ddd;
+}
+
+table.detail-view th
+{
+    text-align: left;
+    width: 160px;
+    color: #999;
+}
+
+/*table.detail-view tr
+{
+    border-bottom: 1px dotted #ddd;
+}*/
+table.detail-view tr {
+	border-bottom-width: 1px;
+	border-bottom-style: none;
+	border-bottom-color: #ddd;
+}
+
+
+table.detail-view tr.odd
+{
+    background:transparent;
+}
+
+table.detail-view tr.even
+{
+    background:transparent;
+}
+
+table.detail-view tr.odd th
+{
+}
+
+table.detail-view tr.even th
+{
+}
+div.answer
+{
+    width:791px;
+}
+
+

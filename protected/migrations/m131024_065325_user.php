@@ -1,6 +1,6 @@
 <?php
 
-class m131024_065325_user extends CDbMigration {
+class m131024_065325_user extends DTDbMigration {
 
     public function up() {
         $this->createTable('user', array(
@@ -13,6 +13,11 @@ class m131024_065325_user extends CDbMigration {
             'phone' => 'INT(11)  NOT NULL',
             'awsaccesskey' => 'varchar(200) NOT NULL',
             'awssecretkey' => 'varchar(200) NOT NULL',
+            'create_time' => 'datetime NOT NULL',
+            'create_user_id' => 'int(11) unsigned NOT NULL',
+            'update_time' => 'datetime NOT NULL',
+            'update_user_id' => 'int(11) unsigned NOT NULL',
+            'activity_log' => 'text',
             'PRIMARY KEY (`id`)'
                 ), 'ENGINE=InnoDB');
     }
@@ -21,14 +26,4 @@ class m131024_065325_user extends CDbMigration {
         $this->dropTable('user');
     }
 
-    /*
-      // Use safeUp/safeDown to do migration with transaction
-      public function safeUp()
-      {
-      }
-
-      public function safeDown()
-      {
-      }
-     */
 }

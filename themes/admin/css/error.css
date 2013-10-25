@@ -1,0 +1,53 @@
+fieldset, input, textarea, select, a.button, .meta ul li a, ul.nav li li a:hover, p.main input, input.login, table, .message, #easyTooltip, div.wysiwyg {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+/*NOTIFICATION MESSAGES*/
+.message {
+    display:block;
+    padding:5px 20px;
+    margin-bottom:5px;
+}
+
+.message p {
+    width:auto;
+    margin-bottom:0;
+    margin-left:60px;
+    margin-top:3px;
+    font-size:12px;
+    color:#555;
+}
+
+.message h2 {
+    margin-left:60px;
+    margin-bottom:2px;
+    margin-top:0px;
+    color:#333;
+    font-size:15px;
+}
+
+.warning {
+    background:#feffe2 url('../images/error/warning_48.png') 20px 50% no-repeat;
+    border:1px solid #eec377;
+} 
+
+
+.error {
+    background: url("../images/error/stop_48.png") no-repeat scroll 20px 50% transparent;
+/*    border:1px solid #ecba8d;*/
+}
+
+.success {
+    background:#edffc3 url('../images/error/tick_48.png') 20px 50% no-repeat;
+    border:1px solid #a1c261;
+}
+
+.information {
+    background:#ddf0ff url('../images/error/info_48.png') 20px 50% no-repeat;
+    border:1px solid #b7caf0;
+}
+
+.message:hover {
+    cursor:pointer;
+}

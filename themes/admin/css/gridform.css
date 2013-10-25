@@ -1,0 +1,214 @@
+.child-container {
+    /*border:  1px solid #f4f4f4;
+    */
+    margin: 10px 0px;
+
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px; /*-moz-box-shadow: 0px 0px 5px #F1F1F1;
+    */
+    /**/
+    width: 787px;
+}
+.child-container-nth{
+    width: 750px !important;
+    margin-left: 10px !important;
+}
+
+.child-container:hover {
+    /*border:  1px solid #dbdbdb;
+    */
+}
+
+.child-attachment {
+    width: 662px;
+    margin-left: 130px;
+}
+
+/*.child-container .form {
+        
+width:  auto;
+        
+}
+
+*/
+.child {
+    padding: 10px;
+}
+
+.submit-btn-div {
+    float: left;
+    padding: 5px 5px 5px 570px;
+}
+
+.add_more {
+    padding: 5px 0px 0px 10px;
+    font-size: 13px;
+    float: left;
+}
+
+div.grid_title .title {
+    float: left;
+    padding: 2px;
+}
+
+div.grid_title .title label {
+    margin: 0px;
+    padding: 1px;
+    color: #6f6f6f;
+    font-size: 12px;
+    padding-left: 5px;
+}
+
+.grid_fields {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.grid_fields .field {
+    border: 1px solid #FFF;
+    float: left;
+    padding: 0px 2px;
+}
+
+.grid_fields .field select {
+    width: 100%;
+    margin: 0px 2px 2px 4px;
+}
+
+.grid_fields .del {
+    position: inherit;
+    right: 0px;
+    padding-top: 2px;
+    float: right;
+}
+
+.grid_fields .field input {
+    margin: 0px 2px 2px 4px;
+    width: 94%;
+}
+.grid_fields .field input[type="file"]  {
+    margin: 0px 2px 2px 4px;
+    width: 80% !important;
+}
+div.grid_heading {
+    float: left;
+    padding: 5px;
+}
+
+div.grid_delete {
+    float: right;
+    padding: 5px;
+}
+
+div.title label {
+    width: inherit !important;
+    font-size: 13px;
+}
+
+div.field textarea {
+    width: 90%;
+    height: 40px;
+}
+
+div#companyinfo select {
+    width: 280px;
+}
+
+#projectinfo input[type='text'] {
+    width: 270px;
+}
+
+div.grid_title {
+    float: left;
+    padding: 5px 5px 0px 5px;
+}
+
+div.grid_del {
+    float: right;
+    padding: 5px;
+}
+
+.form-label {
+    margin-left: 5px;
+}
+
+.child-container div div div.wide.form .buttons,.child-container div div div.wide.form.wide.form .hint,.child-container div div div.wide.form.wide.form .errorMessage {
+    padding-left: 135px;
+}
+
+.parlog_content {
+    /*border:  1px solid #E5E5E5;
+    */
+    margin: 10px 0;
+    width: 793px;
+}
+
+.multisubchild {
+    border: 1px solid #ccc;
+    margin: 10px 0 0 23px;
+}
+
+.multisubchild .child-container {
+    width: 740px;
+    margin-left: 5px;
+}
+
+/*total row for grid form*/
+.total_runtime {
+    border-top: 2px solid #E5E5E5;
+
+}
+
+/* tootl tip class that used in grid form*/
+.tooltip
+{
+    cursor: pointer;
+}
+
+
+/* grid form for multiple */
+
+.small_fields div
+{
+    margin-right: 2px;
+}
+
+.small_fields div div label
+{
+    width: 95% !important;
+}
+
+.small_fields div div input[type=text]
+{
+    width: 95% !important;
+}
+.cancel_widget
+{
+    margin-left: 15px;
+}
+.link-column
+{
+    width: 20px;
+}
+.image-thumb{
+    width:60px; border: 1px solid #CCC; padding:3px; -moz-box-shadow:1px 1px 3px #CCC; border-radius:3px;
+}
+
+div.field div.errorMessage
+{
+    font-size: 10px !important;
+    margin-left: 4px;
+    padding-left: 0 !important;
+}
+
+
+.full_grid_form .row {
+    float: left;
+    clear: none !important;
+    margin-right:5px !important; 
+    
+}
+.full_grid_form {
+    border-bottom: 1px solid black;
+}

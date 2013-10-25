@@ -15,7 +15,7 @@ include '_config/_conf_params.php';
 
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
-    'name' => 'Darussalam Publishers',
+    'name' => 'Dtech S3',
     'theme' => 'default',
     'homeUrl'=>array('/web/default/index'),
     // preloading 'log' component

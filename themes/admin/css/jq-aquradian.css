@@ -1,0 +1,41 @@
+/* 
+    Document   : jQaquradian
+    Created on : Nov 2, 2011, 4:30:07 PM
+    Author     : ali.abbas
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+.ui-accordion-header
+{
+    border-bottom: 1px dotted #999999;
+    padding-bottom: 13px;
+    margin-bottom:10px !important;
+   
+   
+}
+.ui-accordion-header a
+{
+    color:#000000;
+    font-weight: bold;
+   margin-left: 5px;
+    
+}
+.ui-accordion-content
+{
+    border: 0;
+}
+
+/*------comments for border of left right  of layout-----*/
+.span-18
+{
+    border-left: 0 !important;
+}
+.span-5
+{
+    border-right: 1px dotted #999999 !important;
+}

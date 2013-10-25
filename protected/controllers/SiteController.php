@@ -28,18 +28,18 @@ class SiteController extends Controller {
         $model = new ConfigForm;
 
         if (isset($_POST['ConfigForm'])) {
-            $record=  User::model()->findByPk(Yii::app()->user->user_id);
+            $record = User::model()->findByPk(Yii::app()->user->user_id);
             $model->attributes = $_POST['ConfigForm'];
-           $model->awskey=$record->awsaccesskey;
-           $model->awssecret=$record->awssecretkey;
-           
-            if ( $model->bucketsave()) {
+            $model->awskey = $record->awsaccesskey;
+            $model->awssecret = $record->awssecretkey;
+
+            if ($model->bucketsave()) {
 
                 $s3 = $this->sets3($model);
-                
+
                 $this->render('pop', array(
-                's3' => $s3,
-                'model' => $model,
+                    's3' => $s3,
+                    'model' => $model,
                 ));
             }
         } else {
@@ -114,14 +114,15 @@ class SiteController extends Controller {
         }
         return $s3;
     }
-
+    /**
+     * User sign up process here
+     */
     public function actionSignUp() {
         // renders the view file 'protected/views/site/index.php'
         // using the default layout 'protected/views/layouts/main.php'
 
         $model = new SignUpForm;
 
-//
         if (isset($_POST['SignUpForm'])) {
             $model->attributes = $_POST['SignUpForm'];
 
@@ -156,6 +157,8 @@ class SiteController extends Controller {
      */
     public function actionLogin() {
         $model = new LoginForm;
+        
+        $this->layout = "//layouts/login_admin";
 
         // if it is ajax validation request
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
