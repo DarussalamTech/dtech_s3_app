@@ -120,5 +120,16 @@ class User extends CActiveRecord {
             'criteria' => $criteria,
         ));
     }
+    /**
+     * validate password using in login process
+     * @param type $password
+     * @param type $old_password
+     * @return type
+     */
+    public function validatePassword($password, $old_password) {
+
+        return md5($password) === $old_password;
+        //return $password;
+    }
 
 }
