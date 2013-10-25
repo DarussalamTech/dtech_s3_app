@@ -2,28 +2,19 @@
 
 // This is the configuration for yiic console application.
 // Any writable CConsoleApplication properties can be configured here.
+
+include '_config/_conf_db.php';
+include '_config/_conf_logs.php';
+include '_config/_conf_import.php';
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'My Console Application',
+    'import' => $import,
     // preloading 'log' component
     'preload' => array('log'),
     // application components
     'components' => array(
-        'db' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=s3',
-            'emulatePrepare' => true,
-            'username' => 'root',
-            'password' => 'admin',
-            'charset' => 'utf8',
-        ),
-        'log' => array(
-            'class' => 'CLogRouter',
-            'routes' => array(
-                array(
-                    'class' => 'CFileLogRoute',
-                    'levels' => 'error, warning',
-                ),
-            ),
-        ),
+        'db' => $conf_component_db,
+        'log' => $logs,
     ),
 );

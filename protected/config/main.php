@@ -1,95 +1,45 @@
 <?php
 
-// uncomment the following to define a path alias
-// Yii::setPathOfAlias('local','path/to/local-folder');
+/**
+ *  doing custom configurations files
+ *  for handle seperate configurations
+ *  seperately
+ */
+include '_config/_conf_import.php';
+include '_config/_conf_modules.php';
+include '_config/_conf_component.php';
+include '_config/_conf_url_manager.php';
+include '_config/_conf_db.php';
+include '_config/_conf_logs.php';
+include '_config/_conf_params.php';
 
-// This is the main Web application configuration. Any writable
-// CWebApplication properties can be configured here.
 return array(
-	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'My Web Application',
-
-	// preloading 'log' component
-	'preload'=>array('log'),
-
-	// autoloading model and component classes
-	'import'=>array(
-		'application.models.*',
-		'application.components.*',
-	),
-
-	'modules'=>array(
-		// uncomment the following to enable the Gii tool
-		
-		'gii'=>array(
-			'class'=>'system.gii.GiiModule',
-			'password'=>'1',
-			// If removed, Gii defaults to localhost only. Edit carefully to taste.
-			'ipFilters'=>array('127.0.0.1','::1'),
-		),
-		
-	),
-
-	// application components
-	'components'=>array(
-		'user'=>array(
-			// enable cookie-based authentication
-			'allowAutoLogin'=>true,
-		),
-		// uncomment the following to enable URLs in path-format
-		
-		'urlManager'=>array(
-			'urlFormat'=>'path',
-                    
-			'rules'=>array(
-                                '' => '/site/login',
-                      
-                                
-                            
-				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
-				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
-			),
-		),
-		/*
-		'db'=>array(
-			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
-		),*/
-		// uncomment the following to use a MySQL database
-		
-		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=s3',
-			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => 'admin',
-			'charset' => 'utf8',
-		),
-		
-		'errorHandler'=>array(
-			// use 'site/error' action to display errors
-			'errorAction'=>'site/error',
-		),
-		'log'=>array(
-			'class'=>'CLogRouter',
-			'routes'=>array(
-				array(
-					'class'=>'CFileLogRoute',
-					'levels'=>'error, warning',
-				),
-				// uncomment the following to show log messages on web pages
-				/*
-				array(
-					'class'=>'CWebLogRoute',
-				),
-				*/
-			),
-		),
-	),
-
-	// application-level parameters that can be accessed
-	// using Yii::app()->params['paramName']
-	'params'=>array(
-		// this is used in contact page
-		'adminEmail'=>'webmaster@example.com',
-	),
+    'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
+    'name' => 'Darussalam Publishers',
+    'theme' => 'default',
+    'homeUrl'=>array('/web/default/index'),
+    // preloading 'log' component
+    'preload' => array('log'),
+    // autoloading model and component classes
+    'import' => $import,
+    'modules' => $modules,
+    // application components
+    'components' => array(
+        'user' => $conf_component_user,
+        'urlManager' => $url_manager,
+        'db' => $conf_component_db,
+        'errorHandler' => array(
+            // use 'site/error' action to display errors
+            'errorAction' => 'error/error', //error controoler/error actions
+        ),
+        'log' => $logs,
+        //'email' => $conf_email_user,
+        'messages' => array(
+            'class' => 'CPhpMessageSource',
+        // additional parameters for CDbMessageSource here
+        ),
+    ),
+    // application-level parameters that can be accessed
+    // using Yii::app()->params['paramName']
+    'params' => $params,
 );
