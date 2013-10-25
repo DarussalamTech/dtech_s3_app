@@ -1,4 +1,10 @@
+<?php
+$this->menu=array(
+	array('label'=>'Create new Bucket', 'url'=>array('index')),
+	array('label'=>'View Buckets', 'url'=>array('view')),
+);
 
+?>
 
 <div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(

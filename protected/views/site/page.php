@@ -7,6 +7,7 @@
 
 $this->menu=array(
 	array('label'=>'Create new Bucket', 'url'=>array('index')),
+        array('label'=>'View Buckets', 'url'=>array('view')),
 	
 );
 ?>

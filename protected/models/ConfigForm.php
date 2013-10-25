@@ -56,7 +56,7 @@ class ConfigForm extends CFormModel {
         $model = new Buckets();
      
          $model->name=  $this->bucket_name;
-        $model->uid = Yii::app()->user->user_id;
+        $model->create_user_id = Yii::app()->user->user_id;
 
         if ($model->save() ) {
             return true;

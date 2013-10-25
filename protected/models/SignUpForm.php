@@ -120,7 +120,7 @@ class SignUpForm extends CFormModel {
         $model->email = $this->email;
         $model->phone = $this->phone;
         $model->address = $this->address;
-        $model->password = $this->password;
+        $model->password = md5($this->password);
         $model->awsaccesskey = $this->awsaccesskey;
         $model->awssecretkey = $this->awssecretkey;
         $model->username = $this->username;

@@ -127,7 +127,7 @@ class User extends DTActiveRecord {
      * @return type
      */
     public function validatePassword($password, $old_password) {
-
+        
         return md5($password) === $old_password;
         //return $password;
     }

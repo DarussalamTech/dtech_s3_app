@@ -48,6 +48,25 @@ class SiteController extends Controller {
             $this->render('index', array('model' => $model));
         }
     }
+       public function actionView() {
+        $model = new ConfigForm;
+
+     
+            $record = User::model()->findByPk(Yii::app()->user->user_id);
+            
+            $model->awskey = $record->awsaccesskey;
+            $model->awssecret = $record->awssecretkey;
+
+            
+
+                $s3 = $this->sets3($model);
+
+                $this->render('pop', array(
+                    's3' => $s3,
+                    'model' => $model,
+                ));
+         
+    }
 
     public function actionAjaxcall() {
         $model = new ConfigForm;

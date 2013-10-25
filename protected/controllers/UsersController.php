@@ -238,7 +238,7 @@ class UsersController extends Controller {
 
         if (isset($_POST['SignUpForm'])) {
             $model->attributes = $_POST['SignUpForm'];
-            if ($model->save()) {
+            if ($model->validate() && $model->signup()) {
                 Yii::app()->user->setFlash('success', "Your user has been created successfully");
                 $this->redirect($this->createUrl("/site/login"));
             }
