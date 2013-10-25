@@ -114,29 +114,6 @@ class SiteController extends Controller {
         }
         return $s3;
     }
-    /**
-     * User sign up process here
-     */
-    public function actionSignUp() {
-        // renders the view file 'protected/views/site/index.php'
-        // using the default layout 'protected/views/layouts/main.php'
-
-        $model = new SignUpForm;
-
-        if (isset($_POST['SignUpForm'])) {
-            $model->attributes = $_POST['SignUpForm'];
-
-            if ($model->validate() && $model->signup()) {
-
-
-                $this->redirect($this->createUrl('login'));
-            } else {
-                CVarDumper::dump($model->errors, 10, true);
-                die('4');
-            }
-        }
-        $this->render('signup', array('model' => $model));
-    }
 
     /**
      * This is the action to handle external exceptions.
@@ -157,7 +134,7 @@ class SiteController extends Controller {
      */
     public function actionLogin() {
         $model = new LoginForm;
-        
+
         $this->layout = "//layouts/login_admin";
 
         // if it is ajax validation request

@@ -9,6 +9,24 @@ class UsersController extends Controller {
     public $layout = '//layouts/column2';
 
     /**
+     * Declares class-based actions.
+     */
+    public function actions() {
+        return array(
+            // captcha action renders the CAPTCHA image displayed on the contact page
+            'captcha' => array(
+                'class' => 'CCaptchaAction',
+                'backColor' => 0xFFFFFF,
+            ),
+            // page action renders "static" pages stored under 'protected/views/site/pages'
+            // They can be accessed via: index.php?r=site/page&view=FileName
+            'page' => array(
+                'class' => 'CViewAction',
+            ),
+        );
+    }
+
+    /**
      * @return array action filters
      */
     public function filters() {
@@ -30,7 +48,7 @@ class UsersController extends Controller {
                 'users' => array('admin'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('register'),
+                'actions' => array('register','captcha'),
                 'users' => array('?'),
             ),
             array('allow',
@@ -213,13 +231,13 @@ class UsersController extends Controller {
      * of page
      */
     public function actionRegister() {
-        $model = new User;
+        $model = new SignUpForm();
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
-        if (isset($_POST['User'])) {
-            $model->attributes = $_POST['User'];
+        if (isset($_POST['SignUpForm'])) {
+            $model->attributes = $_POST['SignUpForm'];
             if ($model->save()) {
                 Yii::app()->user->setFlash('success', "Your user has been created successfully");
                 $this->redirect($this->createUrl("/site/login"));

@@ -1,0 +1,94 @@
+#scroll1,
+#scroll2,
+#scroll3,
+#scroll4,
+#scroll5,
+#scroll6,
+#scroll7 {
+    overflow: auto;
+    height: 300px;
+    width: 400px;
+}
+
+ #scroll2 p,
+ #scroll3 p,
+#scroll7 p {
+    min-width: 800px;
+}
+
+.scrollBox {
+    display: inline-block;
+    background: #fefefe;
+    padding: 10px;
+    border: 1px solid #efeded;
+}
+
+ p.justified {
+    text-align: justify;
+}
+
+ p.left {
+    text-align: left;
+}
+
+#footer {
+    margin: auto;
+    margin-top: 40px;
+    padding: 10px 0px;
+    min-height: 100px;
+    width: 500px;
+    border-top: 1px solid #888;
+    box-shadow: inset 0px 1px 0px #fff;
+    text-align: center;
+}
+
+
+
+/* Specific CSS for "ui-scrollbar-styled" class */
+
+.ui-scrollbar.ui-scrollbar-styled .ui-scrollbar-scrollbarY .ui-scrollbar-track {
+    height: 300px;
+}
+
+.ui-scrollbar.ui-scrollbar-styled .ui-scrollbar-scrollbarX .ui-scrollbar-track {
+    width: 60px;
+}
+
+.ui-scrollbar.ui-scrollbar-styled .ui-scrollbar-scrollbarY .ui-scrollbar-thumb,
+.ui-scrollbar.ui-scrollbar-styled .ui-scrollbar-scrollbarX .ui-scrollbar-thumb {
+    height: 300px;
+    width: 10px;
+    border-radius: 10px;
+    background-color: rgba(128,128,128, 0.9);
+}
+
+.ui-scrollbar.ui-scrollbar-styled .ui-scrollbar-scrollbarY:hover .ui-scrollbar-thumb,
+.ui-scrollbar.ui-scrollbar-styled .ui-scrollbar-scrollbarX:hover .ui-scrollbar-thumb {
+    background-color: rgba(72,72,72, 0.9);
+}
+
+.ui-scrollbar.ui-scrollbar-styled .ui-scrollbar-scrollbarY .ui-scrollbar-track,
+.ui-scrollbar.ui-scrollbar-styled .ui-scrollbar-scrollbarX .ui-scrollbar-track {
+    background: #cbcbcd;
+    border: none;
+}
+
+.ui-scrollbar.ui-scrollbar-styled .ui-scrollbar-scrollbarY .ui-scrollbar-track {
+    width: 2px;
+    padding: 0px;
+    left: 4px;
+}
+
+.ui-scrollbar.ui-scrollbar-styled .ui-scrollbar-scrollbarX .ui-scrollbar-track {
+    height: 2px;
+    padding: 0px;
+    top: 4px;
+}
+
+.ui-scrollbar.ui-scrollbar-styled .ui-scrollbar-scrollbarY .ui-scrollbar-thumb {
+    left: -4px;
+}
+
+.ui-scrollbar.ui-scrollbar-styled .ui-scrollbar-scrollbarX .ui-scrollbar-thumb {
+    top: -4px;
+}

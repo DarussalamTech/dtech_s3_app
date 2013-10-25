@@ -66,17 +66,9 @@ class SignUpForm extends CFormModel {
      * @return boolean whether login is successful
      */
     public function check($attribute, $params) {
-        $model = User::model()->findAll();
-        if (isset($model)) {
-
-            foreach ($model as $m) {
-                if ($m->username == $this->username)
-                    $this->addError('username', 'The username is already taken');
-               return false;
-            }
+        if (User::model()->findByAttributes(array("username" => $this->$attribute))) {
+            $this->addError('username', 'The username is already taken');
         }
-
-        return true;
     }
 
     public function accesskey($attribute, $params) {
@@ -114,7 +106,7 @@ class SignUpForm extends CFormModel {
             foreach ($model as $m) {
                 if ($m->email == $this->email)
                     $this->addError('email', 'The email is already taken');
-              return false;
+                return false;
             }
         }
 
@@ -129,8 +121,8 @@ class SignUpForm extends CFormModel {
         $model->phone = $this->phone;
         $model->address = $this->address;
         $model->password = $this->password;
-        $model->awsaccesskey=  $this->awsaccesskey;
-        $model->awssecretkey=  $this->awssecretkey;
+        $model->awsaccesskey = $this->awsaccesskey;
+        $model->awssecretkey = $this->awssecretkey;
         $model->username = $this->username;
 
 
