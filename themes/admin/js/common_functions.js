@@ -722,21 +722,6 @@ function openwindow(id,url)
 }
 
 
-//// use for document parent association checbox to check child checboxes
-$(document).ready(function(){  
-
-    if($(window).width()<905)
-    {
-        $(".menu").hide();
-        $('.operations').hide();
-        $(".button-column").hide()
-        $(".print_link_btn").hide();
-        $("#footer").hide();
-                
-    }
-  
-});
-
 function  un_checkboxes()
 {
     $('input').attr('checked', false);

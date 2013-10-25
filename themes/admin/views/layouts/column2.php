@@ -38,27 +38,7 @@
                     ),
                     'htmlOptions' => array('style' => 'font-size:12px;margin-top:0')
                 ));
-                $this->widget('zii.widgets.jui.CJuiAccordion', array(
-                    'panels' => array(
-                        'Back Ups' => '<ul class="accordion-ul">' .
-                        '<li>' . CHtml::link('Data Base (.sql)', array('/backUp/backUpSql')) .
-                        '</li>' .
-                        '<li>' . CHtml::link('Images (zip/gz)', array('/backUp/backUpImage')) .
-                        '</li>' .
-                        '<li>' . CHtml::link('All Back-ups', array('/backUp/allBackup')) .
-                        '</li>' .
-                        '</ul>',
-                    ),
-                    // additional javascript options for the accordion plugin
-                    'cssFile' => Yii::app()->getClientScript()->registerCssFile(Yii::app()->theme->baseUrl . '/css/jq-aquradian.css'),
-                    'options' => array(
-                        'autoHeight' => false,
-                        'navigation' => true,
-                        'clearStyle' => true,
-                        'resize' => true,
-                    ),
-                    'htmlOptions' => array('style' => 'font-size:12px;margin-top:0')
-                ));
+          
             } else {
                 $this->widget('zii.widgets.CMenu', array(
                     'items' => $this->menu,
