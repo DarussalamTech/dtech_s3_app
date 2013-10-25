@@ -20,7 +20,7 @@
  * @property string $update_user_id
  * @property string $activity_log
  */
-class User extends CActiveRecord {
+class User extends DTActiveRecord {
 
     /**
      * Returns the static model of the specified AR class.

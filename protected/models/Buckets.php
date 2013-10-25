@@ -12,7 +12,7 @@
  * @property string $update_user_id
  * @property string $activity_log
  */
-class Buckets extends CActiveRecord {
+class Buckets extends DTActiveRecord {
 
     /**
      * Returns the static model of the specified AR class.
