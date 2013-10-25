@@ -59,7 +59,7 @@
 
             <div id="header" class="menu">
                 <div id="logo" style="width: 70px;">
-                    <img src="<?php echo Yii::app()->baseUrl; ?>/images/logo/logo.png" width="60" />
+                    <img src="<?php echo Yii::app()->baseUrl; ?>/images/logo/logo.png" width="28" />
                 </div>
                 <div id="afterLogo" class="menu">
                     <!-- header -->
