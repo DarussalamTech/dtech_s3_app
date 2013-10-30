@@ -45,10 +45,15 @@ $form = $this->beginWidget('CActiveForm', array(
                 </div>
 
                 <div class="row"><div class="right">
-                        <?php echo CHtml::submitButton('Login', array('class' => 'button')); ?>
+                        <?php echo CHtml::submitButton('Login', array('class' => 'button')); 
+                        
+                        
+                        echo CHtml::link('Register',array('/users/register'),array('class' => 'button'));
+                        ?>
 <!--                        <input type="button" class="button" value="Login" >-->
+                        
                     </div></div>
-
+                
             </div>
         </fieldset>
     </div></div>

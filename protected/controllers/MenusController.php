@@ -242,7 +242,7 @@ class MenusController extends Controller {
     public function actionInstallMenu() {
         Menu::model()->deleteAll();
 
-        $ary[] = array("id" => "1", "pid" => "0", "root_parent" => "1", "controller" => "site", "action" => "index", "default_title" => "Home", "user_title" => "Home", "is_assigned" => "Yes", "min_permission" => "View", "weight" => "1");
+        $ary[] = array("id" => "1", "pid" => "0", "root_parent" => "1", "controller" => "site", "action" => "page", "default_title" => "Home", "user_title" => "Home", "is_assigned" => "Yes", "min_permission" => "View", "weight" => "1");
 
 
 //        $ary[] = array("id" => "2", "pid" => "0", "root_parent" => "2", "controller" => "category", "action" => "index", "default_title" => "Category", "user_title" => "Category", "is_assigned" => "Yes", "min_permission" => "View", "weight" => "2");

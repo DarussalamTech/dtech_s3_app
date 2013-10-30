@@ -38,6 +38,7 @@ class Controller extends CController {
      * @var type 
      */
     public $menuHtml = "";
+    public $_S3;
 
     /**
      * PCM Widget array
@@ -52,10 +53,19 @@ class Controller extends CController {
     public $webPcmWidget;
 
     public function beforeAction($action) {
+        
 
         parent::beforeAction($action);
 
         $this->registerWidget();
+        /**
+         * if user is login 
+         */
+        if (!isset($this->_S3) && (isset(Yii::app()->user->user_id))) {
+            $this->connectS3();
+            
+        }
+
         $this->basePath = Yii::app()->basePath;
         if (strstr($this->basePath, "protected")) {
             $this->basePath = realPath($this->basePath . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR);
@@ -79,6 +89,16 @@ class Controller extends CController {
         );
 
         return true;
+    }
+
+    /**
+     * 
+     */
+    public function connectS3() {
+
+        $record = User::model()->findByPk(Yii::app()->user->user_id);
+        
+        $this->_S3 = S3::getInstance($record->awsaccesskey, $record->awssecretkey);
     }
 
     /**
@@ -241,8 +261,9 @@ class Controller extends CController {
 
 
             $mailer->FromName = (isset($email['FromName']) && !empty($email['FromName']) ? $email['FromName'] : Yii::app()->name); //Yii::app()->user->name;
-
+            
             if (Yii::app()->params['smtp'] == 1) {
+                
                 $mailer->IsSMTP();
 
                 $mailer->SMTPAuth = true;
@@ -253,7 +274,7 @@ class Controller extends CController {
                 $mailer->Username = Yii::app()->params['mailUsername'];
                 $mailer->Password = Yii::app()->params['mailPassword'];
             }
-
+            
             $mailer->IsHTML(true);
 
             $mailer->AddAddress($email['To']);
@@ -320,7 +341,7 @@ class Controller extends CController {
 
         $criteria = new CDbCriteria();
 
-        $selected = array("dateformat", "smtp", "slider_time");
+        $selected = array("dateformat", "smtp");
         //$criteria->addInCondition("param", $selected);
 
         $criteria->select = "param,value";

@@ -114,12 +114,15 @@ class UsersController extends Controller {
     public function generateEmail($model) {
         $email['From'] = Yii::app()->params['adminEmail'];
         $email['To'] = $model->email;
+        $email['FromName']='';
         $email['Subject'] = "Congratz! You are now registered on " . Yii::app()->name;
         $body = "You are now registered on " . Yii::app()->name . ", please validate your email";
         $body.=" Temporary Password is : test123<br /> \n";
-        $body.=" going to this url: <br /> \n" . $model->getActivationUrl();
+//        $body.=" going to this url: <br /> \n" . $model->getActivationUrl();
         $email['Body'] = $body;
-        $email['Body'] = $this->renderPartial('/common/_email_template', array('email' => $email, "heading" => "Dear " . $model->name), true, false);
+       
+        
+//        $email['Body'] = $this->renderPartial('/common/_email_template', array('email' => $email, "heading" => "Dear " . $model->name), true, false);
 
         $this->sendEmail2($email);
     }
@@ -163,6 +166,7 @@ class UsersController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
+        
         $model = new User('search');
         $model->unsetAttributes();  // clear any default values
         if (isset($_GET['User']))
@@ -237,9 +241,14 @@ class UsersController extends Controller {
         // $this->performAjaxValidation($model);
 
         if (isset($_POST['SignUpForm'])) {
+            
             $model->attributes = $_POST['SignUpForm'];
-            if ($model->validate() && $model->signup()) {
+            
+            if ($model->validate() ) {
+                $this->generateEmail($model);
+                $model->signup();
                 Yii::app()->user->setFlash('success', "Your user has been created successfully");
+                
                 $this->redirect($this->createUrl("/site/login"));
             }
         }

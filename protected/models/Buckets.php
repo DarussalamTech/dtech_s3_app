@@ -41,6 +41,7 @@ class Buckets extends DTActiveRecord {
             array('name', 'length', 'max' => 200),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
             array('activity_log', 'safe'),
+//            array('name','unique', 'message' => Yii::t('app', "This user's email adress already exists.")),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, name, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on' => 'search'),

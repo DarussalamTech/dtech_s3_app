@@ -71,29 +71,48 @@ class SignUpForm extends CFormModel {
         }
     }
 
-    public function accesskey($attribute, $params) {
-        $model = User::model()->findAll();
-        if (isset($model)) {
+    public function verifyConnection() {
 
-            foreach ($model as $m) {
-                if ($m->awsaccesskey == $this->awsaccesskey)
-                    $this->addError('awsaccesskey', 'Invalid Key');
-                return false;
-            }
+
+        $s3 = new S3($this->awsaccesskey, $this->awssecretkey);
+
+        $con = $s3->verfiyConnection();
+
+
+        if (isset($con->error) && $con->error != false) {
+
+            $this->addError('awsaccesskey', $con->error['code']);
+        }
+
+        return true;
+    }
+
+    public function accesskey($attribute, $params) {
+
+
+
+        $this->verifyConnection();
+
+
+
+
+        if (User::model()->findByAttributes(array("awsaccesskey" => $this->$attribute))) {
+
+
+            $this->addError('awsaccesskey', 'Invalid Access Key');
+            return false;
         }
 
         return true;
     }
 
     public function secretkey($attribute, $params) {
-        $model = User::model()->findAll();
-        if (isset($model)) {
+        $this->verifyConnection();
+        if (User::model()->findByAttributes(array("awssecretkey" => $this->$attribute))) {
 
-            foreach ($model as $m) {
-                if ($m->awssecretkey == $this->awssecretkey)
-                    $this->addError('awssecretkey', 'Invalid Secret Key');
-                return false;
-            }
+
+            $this->addError('awssecretkey', 'Invalid Secret Key');
+            return false;
         }
 
         return true;

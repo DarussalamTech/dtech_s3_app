@@ -30,7 +30,7 @@ return array(
         'db' => $conf_component_db,
         'errorHandler' => array(
             // use 'site/error' action to display errors
-            'errorAction' => 'error/error', //error controoler/error actions
+            'errorAction' => 'site/error', //error controoler/error actions
         ),
         'log' => $logs,
         //'email' => $conf_email_user,

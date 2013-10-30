@@ -52,6 +52,7 @@ class User extends DTActiveRecord {
             array('address', 'length', 'max' => 250),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
             array('type,activity_log', 'safe'),
+            
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, username, password, name, email, address, phone, awsaccesskey, awssecretkey, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on' => 'search'),

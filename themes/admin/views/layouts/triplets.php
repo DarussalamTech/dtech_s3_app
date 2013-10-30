@@ -9,7 +9,7 @@
                 
                 ?> <?php 
                 echo '<h2>';
-                echo CHtml::Link('Home',Yii::app()->createUrl('site/index')).'<br>';
+                echo CHtml::Link('Home',Yii::app()->createUrl('site/page')).'<br>';
                 echo CHtml::Link('About Us',Yii::app()->createUrl('site/page&view=about')).'<br>';
                 echo CHtml::Link('Contacts',Yii::app()->createUrl('site/contact')).'<br>';
                 echo CHtml::Link('Login',Yii::app()->createUrl('site/login')).'<br>';
