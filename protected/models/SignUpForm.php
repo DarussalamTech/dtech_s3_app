@@ -37,8 +37,7 @@ class SignUpForm extends CFormModel {
             // username and password are required
             array('name,username, password,retype_password,phone,email,retype_email,address,awsaccesskey,awssecretkey', 'required'),
             array('email', 'email'),
-//            array('email', 'unique', 'message' => Yii::t('app', "This user's email adress already exists.")),
-//            array('username', 'unique', 'message' => Yii::t('app', "This user's email adress already exists.")),
+            array('phone', 'numerical', 'integerOnly' => true),
             array('username', 'check'),
             array('email', 'checkemail'),
             array('awsaccesskey', 'accesskey'),
@@ -132,7 +131,10 @@ class SignUpForm extends CFormModel {
         return true;
     }
 
-    public function signup() {
+    /**
+     * 
+     */
+    public function signUp() {
 
         $model = new User();
         $model->name = $this->name;
@@ -145,14 +147,7 @@ class SignUpForm extends CFormModel {
         $model->username = $this->username;
 
 
-        if ($model->save()) {
-
-            return true;
-        } else {
-            CVarDumper::dump($model->errors, 10, true);
-            die('3');
-            return false;
-        }
+        $model->save(false);
     }
 
     //put your code here

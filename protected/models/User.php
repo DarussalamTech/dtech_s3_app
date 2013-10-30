@@ -52,7 +52,6 @@ class User extends DTActiveRecord {
             array('address', 'length', 'max' => 250),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
             array('type,activity_log', 'safe'),
-            
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id, username, password, name, email, address, phone, awsaccesskey, awssecretkey, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on' => 'search'),
@@ -66,6 +65,7 @@ class User extends DTActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
+            'buckets' => array(self::HAS_MANY, 'Buckets', 'create_user_id'),
         );
     }
 
@@ -121,6 +121,7 @@ class User extends DTActiveRecord {
             'criteria' => $criteria,
         ));
     }
+
     /**
      * validate password using in login process
      * @param type $password
@@ -128,7 +129,7 @@ class User extends DTActiveRecord {
      * @return type
      */
     public function validatePassword($password, $old_password) {
-        
+
         return md5($password) === $old_password;
         //return $password;
     }

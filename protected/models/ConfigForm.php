@@ -12,8 +12,7 @@
  */
 class ConfigForm extends CFormModel {
 
-    //put your code here
-    public $bucket_name;
+
     public $awssecret;
     public $awskey;
 
@@ -25,7 +24,6 @@ class ConfigForm extends CFormModel {
             // name, email, subject and body are required
             array('awssecret,awskey', 'required'),
             array('awssecret', 'verifyConnection'),
-            array('bucket_name', 'check'),
                 // email has to be a valid email address
         );
     }
@@ -35,11 +33,9 @@ class ConfigForm extends CFormModel {
      */
     public function verifyConnection() {
 
-
         $s3 = new S3($this->awskey, $this->awssecret);
 
         $con = $s3->verfiyConnection();
-
 
         if (isset($con->error) && $con->error != false) {
 
@@ -49,42 +45,6 @@ class ConfigForm extends CFormModel {
         return true;
     }
 
-    public function check($attribute, $params) {
-        $model = Buckets::model()->findByAttributes(array('name' => $this->bucket_name));
-
-
-        if (isset($model)) {
-            $this->addError('bucket_name', 'The bucket is already there');
-
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Declares customized attribute labels.
-     * If not declared here, an attribute would have a label that is
-     * the same as its name with the first letter in upper case.
-     */
-    public function attributeLabels() {
-        
-    }
-
-    public function bucketsave() {
-
-        $model = new Buckets();
-
-        $model->name = $this->bucket_name;
-        $model->create_user_id = Yii::app()->user->user_id;
-
-        if ($model->save()) {
-            return true;
-        } else {
-            CVarDumper::dump($model->errors);
-            return false;
-        }
-    }
 
     public function conNew() {
 
@@ -124,24 +84,7 @@ class ConfigForm extends CFormModel {
         //And the foldername is the way(Directory) you want to keep it in the Bucket
     }
 
-    public function createBucket() {
-        if (!class_exists('S3'))
-            require_once('S3.php');
 
-        //AWS access info  
-        if (!defined('awsAccessKey'))
-            define('awsAccessKey', $this->awskey);
-        if (!defined('awsSecretKey'))
-            define('awsSecretKey', $this->awssecret);
-      
-        //instantiate the class
-        $s3 = new S3(awsAccessKey, awsSecretKey);
-
-       
-        $s3->putBucket($this->bucket_name , S3::ACL_PUBLIC_READ_WRITE);
-        
-        return $s3;
-    }
 
 }
 

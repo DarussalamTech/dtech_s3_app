@@ -80,15 +80,10 @@ class S3 {
         return self::$s3Con;
     }
 
-//      public  function verify($accessKey = null, $secretKey = null) {
-//
-//        if ($this->conn === null) {
-//            $this->conn = new S3($accessKey, $secretKey);
-//        }
-//
-//        return $this->conn;
-//    }
-
+    /**
+     * to verify connection is exist
+     * @return type
+     */
     public function verfiyConnection() {
         $rest = new S3Request('GET', '', '');
         $rest = $rest->getResponse();
@@ -260,13 +255,17 @@ class S3 {
         }
         $rest = $rest->getResponse();
 
-        if ($rest->error === false && $rest->code !== 200)
-            $rest->error = array('code' => $rest->code, 'message' => 'Unexpected HTTP status');
-        if ($rest->error !== false) {
-            trigger_error(sprintf("S3::putBucket({$bucket}, {$acl}, {$location}): [%s] %s", $rest->error['code'], $rest->error['message']), E_USER_WARNING);
-            return false;
-        }
-        return true;
+        return $rest;
+        /*
+          if ($rest->error === false && $rest->code !== 200)
+          $rest->error = array('code' => $rest->code, 'message' => 'Unexpected HTTP status');
+          if ($rest->error !== false) {
+          trigger_error(sprintf("S3::putBucket({$bucket}, {$acl}, {$location}): [%s] %s", $rest->error['code'], $rest->error['message']), E_USER_WARNING);
+          return false;
+          }
+          return true;
+         * 
+         */
     }
 
     /**
@@ -390,16 +389,19 @@ class S3 {
                 $rest->setAmzHeader('x-amz-meta-' . $h, $v);
             $rest->getResponse();
         }
-        else
-            $rest->response->error = array('code' => 0, 'message' => 'Missing input parameters');
+        /**
+          else
+          $rest->response->error = array('code' => 0, 'message' => 'Missing input parameters');
 
-        if ($rest->response->error === false && $rest->response->code !== 200)
-            $rest->response->error = array('code' => $rest->response->code, 'message' => 'Unexpected HTTP status');
-        if ($rest->response->error !== false) {
-            trigger_error(sprintf("S3::putObject(): [%s] %s", $rest->response->error['code'], $rest->response->error['message']), E_USER_WARNING);
-            return false;
-        }
-        return true;
+          if ($rest->response->error === false && $rest->response->code !== 200)
+          $rest->response->error = array('code' => $rest->response->code, 'message' => 'Unexpected HTTP status');
+          if ($rest->response->error !== false) {
+          trigger_error(sprintf("S3::putObject(): [%s] %s", $rest->response->error['code'], $rest->response->error['message']), E_USER_WARNING);
+          return false;
+          }
+         * 
+         */
+        return $rest;
     }
 
     /**

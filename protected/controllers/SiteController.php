@@ -28,47 +28,6 @@ class SiteController extends Controller {
         $this->render("page");
     }
 
-    public function actionFile() {
-        $model = new ConfigForm;
-//        CVarDumper::dump($id,10,true);
-//        die();
-        if (isset($_POST['Submit'])) {
-
-            //retreive post variables
-            $bucket = $_POST['bucket'];
-
-            $fileName = $_FILES['theFile']['name'];
-            $fileTempName = $_FILES['theFile']['tmp_name'];
-
-//            var_dump($_FILES);
-            //create a new bucket
-            $folderName = 'uplod/product/34/';
-            // The folder name would be the hierarchy
-            //  we want to create in our bucket
-            $this->_S3->putBucket($bucket, S3::ACL_PUBLIC_READ_WRITE);
-
-            //This method put bucket is the built in method of the api
-            // which stores the image to your bucket
-            //The fileTempName is the file object actually 
-            //And the foldername is the way(Directory) you want to keep it in the Bucket
-
-            if ($this->_S3->putObjectFile($fileTempName, $bucket, $folderName . "e.png", S3::ACL_PUBLIC_READ_WRITE)) {
-                echo "<strong>We successfully uploaded your file.</strong>";
-            } else {
-                echo "<strong>Something went wrong while uploading your file... sorry.</strong>";
-            }
-            $record = Buckets::model()->findByAttributes(array("name" => $bucket));
-
-            $this->actionView($record->id);
-        }
-    }
-
-  
-
-   
-
-
-
     /**
      * This is the action to handle external exceptions.
      */
@@ -104,7 +63,7 @@ class SiteController extends Controller {
             // validate user input and redirect to the previous page if valid
             if ($model->validate() && $model->login())
                 
-                $this->redirect($this->createUrl('site/page'));
+                $this->redirect($this->createUrl('/buckets/index'));
         }
         // display the login form
         $this->render('login', array('model' => $model));

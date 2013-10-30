@@ -1,23 +1,31 @@
 <?php
 
 /**
- * This is the model class for table "buckets".
+ * This is the model class for table "s3_files".
  *
- * The followings are the available columns in table 'buckets':
+ * The followings are the available columns in table 's3_files':
  * @property integer $id
  * @property string $name
+ * @property string $hash
+ * @property integer $bucket_id
  * @property string $create_time
  * @property string $create_user_id
  * @property string $update_time
  * @property string $update_user_id
  * @property string $activity_log
  */
-class Buckets extends DTActiveRecord {
+class S3Files extends CActiveRecord {
+
+    /**
+     * form file instance
+     * @var type 
+     */
+    public $file_instance,$path,$bucket_name;
 
     /**
      * Returns the static model of the specified AR class.
      * @param string $className active record class name.
-     * @return Buckets the static model class
+     * @return S3Files the static model class
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
@@ -27,7 +35,7 @@ class Buckets extends DTActiveRecord {
      * @return string the associated database table name
      */
     public function tableName() {
-        return 'buckets';
+        return 's3_files';
     }
 
     /**
@@ -37,13 +45,16 @@ class Buckets extends DTActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('name, create_time, create_user_id, update_time, update_user_id', 'required'),
+            array('hash, bucket_id, create_time, create_user_id, update_time, update_user_id', 'required'),
+            array('bucket_id', 'numerical', 'integerOnly' => true),
+            array('name', 'file', 'allowEmpty' => false,),
             array('name', 'length', 'max' => 200),
+            array('hash', 'length', 'max' => 100),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
-            array('activity_log', 'safe'),
+            array('bucket_name,path,file_instance,activity_log', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id, name, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on' => 'search'),
+            array('id, name, hash, bucket_id, create_time, create_user_id, update_time, update_user_id, activity_log', 'safe', 'on' => 'search'),
         );
     }
 
@@ -54,8 +65,7 @@ class Buckets extends DTActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'user' => array(self::BELONGS_TO, 'User', 'create_user_id'),
-            'files' => array(self::HAS_MANY, 'S3Files', 'bucket_id'),
+            'bucket' => array(self::BELONGS_TO, 'Buckets', 'bucket_id'),
         );
     }
 
@@ -65,7 +75,9 @@ class Buckets extends DTActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'File',
+            'hash' => 'Hash',
+            'bucket_id' => 'Bucket',
             'create_time' => 'Create Time',
             'create_user_id' => 'Create User',
             'update_time' => 'Update Time',
@@ -86,6 +98,8 @@ class Buckets extends DTActiveRecord {
 
         $criteria->compare('id', $this->id);
         $criteria->compare('name', $this->name, true);
+        $criteria->compare('hash', $this->hash, true);
+        $criteria->compare('bucket_id', $this->bucket_id);
         $criteria->compare('create_time', $this->create_time, true);
         $criteria->compare('create_user_id', $this->create_user_id, true);
         $criteria->compare('update_time', $this->update_time, true);
@@ -98,19 +112,29 @@ class Buckets extends DTActiveRecord {
     }
 
     /**
-     *  create butten
-     * @return type
+     * over ride method
      */
-    public function createBucket() {
-        $s3 = Yii::app()->controller->_S3;
-        $resp = $s3->putBucket($this->name, $s3::ACL_PUBLIC_READ_WRITE);
-
-        if (isset($resp->error) && $resp->error != false) {
-
-            $this->addError('name', $resp->error['code']);
-            return false;
-        }
+    public function beforeSave() {
+        
+        parent::beforeSave();
+        $this->uploadS3File();
         return true;
+    }
+
+    /**
+     * 
+     */
+    public function uploadS3File() {
+        if ($s3Object = Yii::app()->controller->_S3->putObjectFile($this->file_instance->tempName, $this->bucket_name, $this->path, S3::ACL_PUBLIC_READ_WRITE)) {
+            
+            if (isset($s3Object->response->error) && $s3Object->response->error == false) {
+              
+                $this->hash = $s3Object->response->headers['hash'];                
+            }
+            else {
+                $this->addError("name", "wrong");
+            }
+        }
     }
 
 }

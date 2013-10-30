@@ -9,20 +9,18 @@ $form = $this->beginWidget('CActiveForm', array(
     'focus' => ($model->hasErrors()) ? '.error:first' : array($model, 'user_name'),
         ));
 ?>
-   <?php
-    if (Yii::app()->user->hasFlash('login'))
-    {
-        echo "<span style='color:green'>" . Yii::app()->user->getFlash('login') . "</span>";
-    }
-    ?>
+<?php
+if (Yii::app()->user->hasFlash('login')) {
+    echo "<span style='color:green'>" . Yii::app()->user->getFlash('login') . "</span>";
+}
+?>
 <div class="login-content-wrapper"><div class="container">
         <fieldset class="login-fieldset">
             <legend><img src="<?php echo Yii::app()->baseUrl; ?>/images/logo/logo.png" /></legend>
             <div class="login-title">Login</div>
             <div class="login-form">
                 <?php
-                if (Yii::app()->user->hasFlash("registration"))
-                {
+                if (Yii::app()->user->hasFlash("registration")) {
                     echo "<span class='flash'>";
                     echo Yii::app()->user->getFlash("registration");
                     echo "</span>";
@@ -45,15 +43,16 @@ $form = $this->beginWidget('CActiveForm', array(
                 </div>
 
                 <div class="row"><div class="right">
-                        <?php echo CHtml::submitButton('Login', array('class' => 'button')); 
-                        
-                        
-                        echo CHtml::link('Register',array('/users/register'),array('class' => 'button'));
+                        <?php
+                        echo CHtml::submitButton('Login', array('class' => 'button'));
+
+
+                        echo CHtml::link('Register', array('/users/register'), array('class' => 'btn-link'));
                         ?>
 <!--                        <input type="button" class="button" value="Login" >-->
-                        
+
                     </div></div>
-                
+
             </div>
         </fieldset>
     </div></div>
@@ -61,8 +60,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
 <!-- ============================= Message Box Start Here ============================= -->
 <?php
-if (count($model->getErrors()) != 0)
-{
+if (count($model->getErrors()) != 0) {
     ?>
     <div class="login-messages">
         <div class="login-messages-error">
