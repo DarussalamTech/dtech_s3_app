@@ -277,6 +277,8 @@ class S3 {
     public static function deleteBucket($bucket) {
         $rest = new S3Request('DELETE', $bucket);
         $rest = $rest->getResponse();
+        
+        return $rest;
         if ($rest->error === false && $rest->code !== 204)
             $rest->error = array('code' => $rest->code, 'message' => 'Unexpected HTTP status');
         if ($rest->error !== false) {

@@ -14,13 +14,13 @@
  * @property string $update_user_id
  * @property string $activity_log
  */
-class S3Files extends CActiveRecord {
+class S3Files extends DTActiveRecord {
 
     /**
      * form file instance
      * @var type 
      */
-    public $file_instance,$path,$bucket_name;
+    public $file_instance, $path, $bucket_name, $link;
 
     /**
      * Returns the static model of the specified AR class.
@@ -115,7 +115,7 @@ class S3Files extends CActiveRecord {
      * over ride method
      */
     public function beforeSave() {
-        
+
         parent::beforeSave();
         $this->uploadS3File();
         return true;
@@ -126,15 +126,24 @@ class S3Files extends CActiveRecord {
      */
     public function uploadS3File() {
         if ($s3Object = Yii::app()->controller->_S3->putObjectFile($this->file_instance->tempName, $this->bucket_name, $this->path, S3::ACL_PUBLIC_READ_WRITE)) {
-            
+
             if (isset($s3Object->response->error) && $s3Object->response->error == false) {
-              
-                $this->hash = $s3Object->response->headers['hash'];                
-            }
-            else {
+
+                $this->hash = $s3Object->response->headers['hash'];
+                $this->name = $this->file_instance->name;
+            } else {
                 $this->addError("name", "wrong");
             }
         }
     }
 
+    /**
+     * 
+     */
+    public function afterFind() {
+        
+        $this->link = CHtml::link($this->name, "http://" . $this->bucket->name . ".s3.amazonaws.com/" . "dtech/".$this->name);
+        parent::afterFind();
+    }
+ 
 }

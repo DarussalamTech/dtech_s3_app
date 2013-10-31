@@ -54,7 +54,7 @@ class BucketsController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('settings', 'delete', 'view', 'editconnection'),
+                'actions' => array('settings', 'delete', 'update', 'view', 'editconnection', 'deleteimages'),
                 'users' => array('@'),
             ),
             array('deny', // deny all users
@@ -103,13 +103,14 @@ class BucketsController extends Controller {
             $model->bucket_id = $bucketModel->id;
 
             $model->file_instance = DTUploadedFile::getInstance($model, 'name');
-            
-            $model->path = !empty($model->file_instance)?'dtech_' . $model->bucket_id . "/" . $model->file_instance->name:"";
-            
+
+
+            $model->path = !empty($model->file_instance) ? 'dtech/' . $model->file_instance->name : "";
+            $model->hash = "d";
             $model->bucket_name = $bucketModel->name;
 
             if ($model->save()) {
-                $this->redirect($this->createUrl("bucket", array("id" => $bucketModel->id)));
+                $this->redirect($this->createUrl("/buckets/view", array("id" => $bucketModel->id)));
             }
         }
 
@@ -125,16 +126,12 @@ class BucketsController extends Controller {
 
 
         $buckets = $this->_S3->listBuckets();
-
-//        $i = count($buckets);
-//        while ($i > 0) {
-//
-//            $i--;
-//            $model = new ConfigForm();
-//            $model->bucket_name = $buckets[$i];
-//
-//            $model->bucketsave();
-//        }
+        $model = new Buckets;
+        foreach ($buckets as $bucket) {
+            $model->name = $bucket;
+            $model->create_user_id = $user->id;
+            $model->save();
+        }
 
 
 
@@ -157,7 +154,7 @@ class BucketsController extends Controller {
             $model->attributes = $_POST['Buckets'];
             if ($model->createBucket() && $model->save()) {
 
-                $this->redirect($this->createUrl("/bucket/settings"));
+                $this->redirect($this->createUrl("/buckets/settings"));
             }
         }
 
@@ -181,7 +178,7 @@ class BucketsController extends Controller {
             if ($model->validate()) {
 
                 $model->conNew();
-                $this->redirect($this->createUrl('buckets/index'));
+                $this->redirect($this->createUrl('buckets/settings'));
             }
         }
 
@@ -192,18 +189,43 @@ class BucketsController extends Controller {
      * 
      * @param type $id
      */
+    public function actionDeleteimages($id) {
+
+        
+
+
+        $S3file = S3Files::model()->findByPk($id);
+        $bucket = Buckets::model()->findByPk($S3file->bucket_id);
+
+
+        if ($this->_S3->deleteObject($bucket->name, "dtech/". $S3file->name)) {
+            S3Files::model()->deleteByPk($id);
+        }
+
+
+//        Buckets::model()->deleteByPk($id);
+        // renders the view file 'protected/views/site/index.php'
+        // using the default layout 'protected/views/layouts/main.php'
+        if (!isset($_GET['ajax']))
+            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+//        $this->render('view');
+    }
+
     public function actionDelete($id) {
 
-        $model = new ConfigForm;
-        $record1 = Buckets::model()->findByPk($id);
+        $model = new Buckets;
+        $bucket = Buckets::model()->findByPk($id);
         $record = User::model()->findByPk(Yii::app()->user->user_id);
 
-        $model->awskey = $record->awsaccesskey;
-        $model->awssecret = $record->awssecretkey;
-        $model->bucket_name = $record1->name;
-        $model->removeBucket();
+//        $model->awskey = $record->awsaccesskey;
+//        $model->awssecret = $record->awssecretkey;
 
-        Buckets::model()->deleteByPk($id);
+        if ($model->removeBucket($bucket->name)) {
+            Buckets::model()->deleteByPk($id);
+            S3Files::model()->deleteAllByAttributes(array('bucket_id' => $id));
+        }
+
+//        Buckets::model()->deleteByPk($id);
         // renders the view file 'protected/views/site/index.php'
         // using the default layout 'protected/views/layouts/main.php'
         if (!isset($_GET['ajax']))

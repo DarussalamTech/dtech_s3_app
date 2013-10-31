@@ -39,6 +39,7 @@ class Buckets extends DTActiveRecord {
         return array(
             array('name, create_time, create_user_id, update_time, update_user_id', 'required'),
             array('name', 'length', 'max' => 200),
+            array('name', 'unique'),
             array('create_user_id, update_user_id', 'length', 'max' => 11),
             array('activity_log', 'safe'),
             // The following rule is used by search().
@@ -111,6 +112,18 @@ class Buckets extends DTActiveRecord {
             return false;
         }
         return true;
+    }
+
+    public function removeBucket($name) {
+
+        $resp = Yii::app()->controller->_S3->deleteBucket($name);
+        return true;
+//        if (isset($resp->error) && $resp->error != false) {
+////            echo $resp->error['code'];
+////            $this->addError('name', $resp->error['code']);
+//            return false;
+//        }
+//        return true;
     }
 
 }
